@@ -2,7 +2,7 @@ const Hapi = require('hapi');
 
 const server = new Hapi.Server();
 
-let requestHandler = (request) => {
+let routeHandler = (request) => {
 
 };
 
@@ -11,4 +11,4 @@ server.connection({
   port: process.argv[2] || 8080,
 });
 
-module.exports = server;
+module.exports = routeHandler;
