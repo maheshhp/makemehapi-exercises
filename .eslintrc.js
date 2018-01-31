@@ -4,5 +4,5 @@ module.exports = {
     "no-console": 0,
     "prefer-const" : 0
   },
-    "env" : {"es6" : true, "node":true, "jest":true},
+  "env" : {"es6" : true, "node":true, "jest":true},  
 };
