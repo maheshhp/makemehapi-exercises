@@ -15,6 +15,28 @@ server.register(Vision, (err) => {
   if (err) throw err;
 });
 
+server.route({
+  config: {
+    cors: {
+      origin: ['*'],
+      additionalHeaders: ['cache-control', 'x-requested-with'],
+    },
+  },
+  path: '/',
+  method: 'GET',
+  handler: {
+    view: 'index.html',
+  },
+});
+
+server.views({
+  engines: {
+    html: handlebars,
+  },
+  helpersPath: Path.join(__dirname, 'helpers'),
+  path: Path.join(__dirname, 'templates'),
+});
+
 if (!module.parent) {
   server.start((err) => {
     if (err) {

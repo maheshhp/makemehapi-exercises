@@ -7,12 +7,13 @@ describe('Tests for checking the data received from HTTP Get request and helper 
       data: {
         root: {
           query: {
-            foo: 'World',
+            suffix: 'Hello',
+            name: 'World',
           },
         },
       },
     };
-    expect(helper(contextObject)).toMatch('World');
+    expect(helper(contextObject)).toMatch('WorldHello');
     done();
   });
   test('Verify status code for successful HTTP request', (done) => {
@@ -22,8 +23,8 @@ describe('Tests for checking the data received from HTTP Get request and helper 
     });
   });
   test('Verify return data for successful HTTP request', (done) => {
-    solution.inject('/?name=Handling', (response) => {
-      expect(response.result).toMatch('Hello Handling');
+    solution.inject('/?name=Handling&suffix=!', (response) => {
+      expect(response.result).toMatch('Hello Handling!');
       done();
     });
   });
