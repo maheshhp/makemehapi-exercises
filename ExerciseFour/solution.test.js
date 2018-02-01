@@ -7,4 +7,11 @@ describe('Tests for checking the data received from HTTP Get request', () => {
       done();
     });
   });
+  test('Verify return data for successful HTTP request', (done) => {
+    solution.inject('/foo/bar/baz/index.html', (response) => {
+      let returnHtml = 'Hello World';
+      expect(response.result).toMatch(returnHtml);
+      done();
+    });
+  });
 });
