@@ -2,6 +2,7 @@ const Hapi = require('hapi');
 const Path = require('path');
 const Vision = require('vision');
 const handlebars = require('handlebars');
+const helper = require('./helpers/helper');
 
 const server = new Hapi.Server();
 
