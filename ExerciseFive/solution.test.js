@@ -7,4 +7,10 @@ describe('Tests for checking the data received from HTTP Get request', () => {
       done();
     });
   });
+  test('Verify return data for successful HTTP request', (done) => {
+    solution.inject('/?name=Handling', (response) => {
+      expect(response.result).toMatch('Hello Handling');
+      done();
+    });
+  });
 });
