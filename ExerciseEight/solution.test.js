@@ -1,12 +1,32 @@
 const Solution = require('./solution');
-const Fs = require('fs');
+const Path = require('path');
 
-const { server, helper } = Solution;
+let { helper, server } = Solution;
 
 describe('Tests for checking the data received from HTTP Get request and Rot-13 transform helper function', () => {
-  test('Verify status code for successful HTTP request', (done) => {
-    let tempFileStream = Fs.createReadStream('./index.txt');
-    expect(helper(tempFileStream)).toBe(false);
+  test('Verify return value of helper function', (done) => {
+    let readStream = helper(Path.join(__dirname, './index.txt'));
+    let chunks = [];
+    readStream.on('error', err =>
+      console.log(err));
+    readStream.on('data', (chunk) => {
+      chunks.push(chunk);
+    });
+    readStream.on('close', () =>
+      Buffer.concat(chunks));
+    expect(chunks).toBe('Gur Chefhvg bs Uncv-arff');
     done();
+  });
+  test('Verify status code for successful HTTP request', (done) => {
+    server.inject('/', (response) => {
+      expect(response.statusCode).toBe(200);
+      done();
+    });
+  });
+  test('Verify return data for successful HTTP request', (done) => {
+    server.inject('/', (response) => {
+      expect(response.result).toMatch('Gur Chefhvg bs Uncv-arff');
+      done();
+    });
   });
 });
