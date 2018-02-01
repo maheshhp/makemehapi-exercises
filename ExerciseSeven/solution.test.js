@@ -15,4 +15,16 @@ describe('Tests for checking the data received from HTTP Get request and helper 
     expect(helper(contextObject)).toMatch('World');
     done();
   });
+  test('Verify status code for successful HTTP request', (done) => {
+    solution.inject('/?name=Handling', (response) => {
+      expect(response.statusCode).toBe(200);
+      done();
+    });
+  });
+  test('Verify return data for successful HTTP request', (done) => {
+    solution.inject('/?name=Handling', (response) => {
+      expect(response.result).toMatch('Hello Handling');
+      done();
+    });
+  });
 });
