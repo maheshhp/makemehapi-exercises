@@ -1,11 +1,20 @@
 const Hapi = require('hapi');
+const Path = require('path');
+const Inert = require('inert');
 
 const server = new Hapi.Server();
 
 server.connection({
   host: 'localhost',
   port: process.argv[2] || 8080,
+  routes: {
+    files: {
+      relativeTo: Path.join(__dirname, ''),
+    },
+  },
 });
+
+server.register(Inert);
 
 server.route({
   config: {
@@ -16,7 +25,9 @@ server.route({
   },
   path: '/',
   method: 'GET',
-  handler: (request, reply) => reply('Hello hapi'),
+  handler: (request, reply) => {
+    reply.file(Path.join(__dirname, 'test.html'));
+  },
 });
 
 server.start((err) => {
