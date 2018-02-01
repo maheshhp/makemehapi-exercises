@@ -15,7 +15,7 @@ describe('Tests for checking the data received from HTTP Get request', () => {
   });
   test('Verify return data for invalid request string', (done) => {
     Solution.inject('/chickens', (response) => {
-      expect(response.result).toMatch(false);
+      expect(response.result.error).toMatch('Not Found');
       done();
     });
   });

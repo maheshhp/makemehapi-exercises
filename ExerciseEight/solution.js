@@ -20,8 +20,7 @@ server.route({
   method: 'GET',
   config: {
     handler: (req, res) => {
-      let thisfile = Fs.createReadStream(Path.join(__dirname, 'index.txt'));
-      return thisfile.pipe(Rot13());
+      res(helper(Path.join(__dirname, 'index.txt')));
     },
   },
 });
