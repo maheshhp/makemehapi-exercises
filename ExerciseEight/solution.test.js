@@ -12,7 +12,7 @@ describe('Tests for checking the data received from HTTP Get request and Rot-13 
     readStream.on('data', (chunk) => {
       chunks += chunk;
     });
-    readStream.on('close', () => {
+    readStream.on('end', () => {
       expect(chunks).toBe('Gur Chefhvg bs Uncv-arff');
       done();
     });
