@@ -11,6 +11,7 @@ server.connection({
 server.route({
   method: 'POST',
   path: '/login',
+  handler: (request, reply) => reply('login successful'),
 });
 
 if (!module.parent) {
