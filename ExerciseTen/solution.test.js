@@ -8,7 +8,7 @@ describe('Tests for successful and unsuccessful login to the server', () => {
       payload: JSON.stringify({ isGuest: false, username: 'HPM', accessToken: 'HPM321' }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.statusCode).toBe(200);
       done();
     });
   });
@@ -19,7 +19,7 @@ describe('Tests for successful and unsuccessful login to the server', () => {
       payload: JSON.stringify({ isGuest: false, username: 'HPM', accessToken: 'HPM321' }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.statusCode).toBe(404);
       done();
     });
   });
@@ -27,10 +27,10 @@ describe('Tests for successful and unsuccessful login to the server', () => {
     let request = {
       method: 'POST',
       url: '/login',
-      payload: JSON.stringify({ isGuest: false, username: 'HPM' }),
+      payload: JSON.stringify({ isGuest: false, password: 'HPM' }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.statusCode).toBe(400);
       done();
     });
   });
@@ -41,7 +41,7 @@ describe('Tests for successful and unsuccessful login to the server', () => {
       payload: JSON.stringify({ isGuest: true, username: 'HPM' }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.result).toBe('login successful');
       done();
     });
   });
@@ -52,7 +52,7 @@ describe('Tests for successful and unsuccessful login to the server', () => {
       payload: JSON.stringify({ isGuest: true, username: 'HPM', accessToken: 'HPM321' }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.result).toBe('login successful');
       done();
     });
   });
@@ -65,7 +65,7 @@ describe('Tests for successful and unsuccessful login to the server', () => {
       }),
     };
     server.inject(request, (response) => {
-      expect(response.statusCode).toBe(false);
+      expect(response.statusCode).toBe(400);
       done();
     });
   });
